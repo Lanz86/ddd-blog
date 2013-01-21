@@ -21,4 +21,12 @@ class ContainerTest extends BaseIntegrationTestCate
 			$this->get('blog.domain.service.post')
 		);
 	}
+
+	public function testContains_CommentService()
+	{
+		$this->assertInstanceOf(
+			'Blog\DomainBundle\Service\CommentService',
+			$this->get('blog.domain.service.comment')
+		);
+	}
 }

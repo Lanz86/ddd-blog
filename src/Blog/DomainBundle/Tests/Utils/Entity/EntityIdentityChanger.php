@@ -2,6 +2,7 @@
 
 namespace Blog\DomainBundle\Tests\Utils\Entity;
 
+use Blog\DomainBundle\Entity\Comment;
 use Blog\DomainBundle\Entity\Post;
 use Blog\DomainBundle\Entity\User;
 
@@ -23,5 +24,14 @@ class EntityIdentityChanger
 		$reflectionProperty->setAccessible(true);
 		$reflectionProperty->setValue($post, $id);
 		return $post;
+	}
+
+	public static function changeCommentId(Comment $comment, $id)
+	{
+		$reflectionClass = new \ReflectionClass('\Blog\DomainBundle\Entity\Comment');
+		$reflectionProperty = $reflectionClass->getProperty('id');
+		$reflectionProperty->setAccessible(true);
+		$reflectionProperty->setValue($comment, $id);
+		return $comment;
 	}
 }

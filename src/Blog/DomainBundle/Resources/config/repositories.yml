@@ -10,3 +10,9 @@ services:
         factory_service: blog.domain.infrastructure.doctrine.factory
         factory_method: createPostRepository
         public: false
+
+    blog.domain.repository.comment:
+        class: Blog\DomainBundle\Infrastructure\IRepository
+        factory_service: blog.domain.infrastructure.doctrine.factory
+        factory_method: createCommentRepository
+        public: false
