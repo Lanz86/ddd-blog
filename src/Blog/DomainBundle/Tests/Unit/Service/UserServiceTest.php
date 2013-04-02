@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\DomainBundle\Tests\Service;
+namespace Blog\DomainBundle\Tests\Unit\Service;
 
 use Blog\DomainBundle\Service\UserService;
 use Blog\DomainBundle\Tests\BaseTestCase;
