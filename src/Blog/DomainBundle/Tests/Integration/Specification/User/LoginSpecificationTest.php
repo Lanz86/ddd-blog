@@ -4,36 +4,25 @@ namespace Blog\DomainBundle\Tests\Integration\Specification\User;
 
 use Blog\DomainBundle\Entity\User;
 use Blog\DomainBundle\Specification\User\LoginSpecification;
-use Blog\DomainBundle\Tests\BaseIntegrationTestCate;
+use Blog\DomainBundle\Tests\Integration\Specification\BaseSpecificationTestCase;
 
-class LoginSpecificationTest extends BaseIntegrationTestCate
+class LoginSpecificationTest extends BaseSpecificationTestCase
 {
-	/**
-	 * @var LoginSpecification
-	 */
-	private $object;
-
-	public function setUp()
+	protected function createSpecification()
 	{
-		$this->object = new LoginSpecification('Tester');
-	}
-
-	public function testImplements()
-	{
-		$this->assertInstanceOf('Blog\\DomainBundle\\Infrastructure\\ISpecification', $this->object);
-		$this->assertInstanceOf('Blog\\DomainBundle\\Infrastructure\\ICriteriaSpecification', $this->object);
+		return new LoginSpecification('Tester');
 	}
 
 	public function testSatisfiedIsShouldBeTrue()
 	{
-		$result = $this->object->isSatisfiedBy(new User('Tester', ''));
+		$result = $this->specification->isSatisfiedBy(new User('Tester', ''));
 
 		$this->assertTrue($result);
 	}
 
 	public function testSatisfiedIsShouldBeFalse()
 	{
-		$result = $this->object->isSatisfiedBy(new User('Yet another tester', ''));
+		$result = $this->specification->isSatisfiedBy(new User('Yet another tester', ''));
 
 		$this->assertFalse($result);
 	}
@@ -42,12 +31,12 @@ class LoginSpecificationTest extends BaseIntegrationTestCate
 	{
 		$this->setExpectedException('\\BadMethodCallException');
 
-		$this->object->isSatisfiedBy(new \stdClass());
+		$this->specification->isSatisfiedBy(new \stdClass());
 	}
 
 	public function testRepositoryShouldFindUser()
 	{
-		$result = $this->getRepository('User')->findOneBySpecification($this->object);
+		$result = $this->getRepository('User')->findOneBySpecification($this->specification);
 
 		$this->assertInstanceOf('Blog\\DomainBundle\\Entity\\User', $result);
 	}
